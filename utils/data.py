@@ -1,7 +1,7 @@
 import discord
 
 from utils import checks
-from discord.ext.commands import AutoShardedBot, DefaultHelpCommand
+from discord.ext.commands import AutoShardedBot
 
 
 class Bot(AutoShardedBot):
@@ -16,34 +16,3 @@ class Bot(AutoShardedBot):
         await self.process_commands(msg)
 
 
-class HelpFormat(DefaultHelpCommand):
-    def get_destination(self, no_pm: bool = False):
-        if no_pm:
-            return self.context.channel
-        else:
-            return self.context.author
-
-    async def send_error_message(self, error):
-        destination = self.get_destination(no_pm=True)
-        await destination.send(error)
-
-    async def send_command_help(self, command):
-        self.add_command_formatting(command)
-        self.paginator.close_page()
-        await self.send_pages(no_pm=True)
-
-    async def send_pages(self, no_pm: bool = False):
-        try:
-            if checks.can_handle(self.context, "add_reactions"):
-                await self.context.message.add_reaction(chr(0x2709))
-                await self.context.message.send(":checkmark: | Check your DMs!")
-        except discord.Forbidden:
-            pass
-
-        try:
-            destination = self.get_destination(no_pm=no_pm)
-            for page in self.paginator.pages:
-                await destination.send(page)
-        except discord.Forbidden:
-            destination = self.get_destination(no_pm=True)
-            await destination.send("<:xmark:798928381973889024> | Unable to send you a DM.")

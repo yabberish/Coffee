@@ -2,14 +2,15 @@ import os
 import discord
 
 from utils import default
-from utils.data import Bot, HelpFormat
+from utils.data import Bot
+from pretty_help import PrettyHelp
 
 config = default.config()
 print("Logging in...")
 
 bot = Bot(
     command_prefix=config["prefix"], prefix=config["prefix"],
-    owner_ids=config["owners"], command_attrs=dict(hidden=True), help_command=HelpFormat(),
+    owner_ids=config["owners"],help_command=PrettyHelp(), command_attrs=dict(hidden=True),
     intents=discord.Intents(
         guilds=True, members=True, messages=True, reactions=True, presences=True
     )
