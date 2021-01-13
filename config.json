@@ -1,0 +1,13 @@
+{
+  "token": "NzY2NjYyNjExNjg4NzUxMTI0.X4moMg._C5w8gkuD-cNBNpFI_AihDxzpn4",
+  "join_message": "Thanks for inviting me! My prefix is `;;`, use `;;help`, if you wanna know how to use my commands!",
+  "owners": [
+    738604939957239930
+  ],
+  "prefix": [
+    ";;"
+  ],
+  "activity": "to ;;h",
+  "activity_type": "listening",
+  "version": "0.0.2"
+}
