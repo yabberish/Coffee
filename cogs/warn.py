@@ -73,6 +73,8 @@ class Warn(commands.Cog):
                 )
                 embed.set_author(name=f"✅ Successfully warned & messaged {member.name.discriminator} for {reason}.", icon_url=str(member.avatar_url))
                 await ctx.send(embed=embed)
+
+                
             
 
 
