@@ -56,14 +56,14 @@ class Warn(commands.Cog):
     @commands.group()
     @commands.guild_only()
     @commands.has_permissions(manage_messages=True)
-    async def warn(self, ctx, member : discord.Member, *, reason="None given."):
+    async def warn(self, ctx, member : discord.Member, *, reason="None"):
         invoker = ctx.author
         if member.id != ctx.author.id:
             if invoker.top_role > member.top_role:
                 c.execute("INSERT INTO warns (user_id, guild_id, reason) VALUES (?, ?, ?)", (member.id, member.guild.id, reason,))
                 conn.commit()
                 embed = discord.Embed(
-                    description = f"You've been warned in {member.guild.name}\**Reason:** {reason}\n**Infractor:** {ctx.author.name}",
+                    description = f"You've been warned in {member.guild.name}\n**Reason:** {reason}\n**Infractor:** {ctx.author.name}",
                     color = 0x2F3136
                 )
                 await member.send(embed=embed)
@@ -71,7 +71,7 @@ class Warn(commands.Cog):
                     color = 0x2F3136
 
                 )
-                embed.set_author(name=f"✅ Successfully warned & messaged {member.name.discriminator} for {reason}.", icon_url=str(member.avatar_url))
+                embed.set_author(name=f"✅ Successfully warned & messaged {member.name} for {reason}.", icon_url=str(member.avatar_url))
                 await ctx.send(embed=embed)
 
                 
