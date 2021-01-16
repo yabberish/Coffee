@@ -5,6 +5,7 @@ from datetime import datetime
 from utils import checks
 conn = sqlite3.connect('database/database.db')
 time_format = '%Y-%m-%d %H:%M:%S'
+import asyncio
 
 def pretty_date(time=False):
     now = datetime.utcnow()
@@ -80,9 +81,11 @@ class warn(commands.Cog):
                 if channel is None:
                  msg = await ctx.send("Log channel not found, creating one for you...")
                  channel = await guild.create_text_channel('coffee-logs')
+                 asyncio.sleep(2)
+                 await msg.edit(content="Adding permissions...")
                  await channel.set_permissions(ctx.guild.default_role, 
                  send_messages=False, read_messages=False)
-                 await asyncio.sleep(3)
+                 await asyncio.sleep(2)
                  await msg.edit(content="Done! #coffee-logs")
                 embed = discord.Embed(title="Warn 📝", description=f"**Infractor:** {ctx.author.mention}\n**Reason:** {reason}\n**User warned:**{member.mention}", color=0x2F3136)
 
