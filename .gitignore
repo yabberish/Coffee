@@ -2,5 +2,4 @@ venv/
 .env
 
 database/
-setup/
 database.db
