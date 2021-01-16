@@ -84,8 +84,6 @@ class warn(commands.Cog):
                  send_messages=False, read_messages=False)
                  await asyncio.sleep(3)
                  await msg.edit(content="Done! #coffee-logs")
-                else:
-                  await ctx.send("I'm unable to create a logs channel, please give me the required permissions or create one yourself.")
                 embed = discord.Embed(title="Warn 📝", description=f"**Infractor:** {ctx.author.mention}\n**Reason:** {reason}\n**User warned:**{member.mention}", color=0x2F3136)
 
                 await channel.send(embed=embed)
