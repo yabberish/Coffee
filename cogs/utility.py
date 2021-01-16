@@ -4,7 +4,6 @@ import discord
 
 from datetime import datetime
 from discord.ext import commands
-from utils import default
 
 
 class utility(commands.Cog):

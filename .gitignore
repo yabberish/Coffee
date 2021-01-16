@@ -1,10 +1,8 @@
+__pycache__
+*.py[cod]
 venv/
 .env
 
+database/database.db
 
-venv/
-database/
-database.db
-
-venv/
 .replit
