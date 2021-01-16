@@ -1,10 +1,10 @@
+# byte compiled
 __pycache__
 *.py[cod]
+
+# environment stuff
 venv/
 .env
 
+# database related
 database/database.db
-
-.replit
-
-
