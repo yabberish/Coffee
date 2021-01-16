@@ -1,12 +1,11 @@
 import os
 import discord
 
-from utils.shard import Bot
+from utils.shards import Bot
 from pretty_help import PrettyHelp
 from os import environ
 
 
-print("Ready!")
 
 bot = Bot(
     command_prefix=environ.get("prefix"), prefix=environ.get('prefix'),
@@ -21,7 +20,8 @@ for file in os.listdir("cogs"):
         name = file[:-3]
         bot.load_extension(f"cogs.{name}")
 
-environ.get('token')
+bot_token = environ.get('token')
+bot.run(bot_token)
 
 
 

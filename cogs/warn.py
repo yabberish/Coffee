@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import sqlite3
 from datetime import datetime
+from utils import checks
 conn = sqlite3.connect('database/database.db')
 time_format = '%Y-%m-%d %H:%M:%S'
 
