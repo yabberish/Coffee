@@ -1,6 +1,12 @@
-venv/
-database/
-database.db
+# byte compiled files
+__pycache__
+*.py[cod]
 
+# virtual environments
 venv/
-.replit
+
+# database
+database/database.db
+
+# sensitive info
+.env
