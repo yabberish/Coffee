@@ -72,8 +72,25 @@ class warn(commands.Cog):
                     color = 0x2F3136
 
                 )
-                embed.set_author(name=f"✅ Successfully warned & messaged {member.name} for {reason}.", icon_url=str(member.avatar_url))
+                embed.set_author(name=f"✅ Successfully logged a warn & messaged {member.name} for {reason}.", icon_url=str(member.avatar_url))
                 await ctx.send(embed=embed)
+                author = ctx.author
+                guild = ctx.guild
+                channel = discord.utils.get(guild.text_channels, name='coffee-logs')
+                if channel is None:
+                 msg = await ctx.send("Log channel not found, creating one for you...")
+                 channel = await guild.create_text_channel('coffee-logs')
+                 await ctx.channel.set_permissions(ctx.guild.default_role, 
+                 send_messages=False, read_messages=False)
+                 await asyncio.sleep(3)
+                 await msg.edit(content="Done! #coffee-logs")
+                else:
+                  await ctx.send("I'm unable to create a logs channel, please give me the required permissions or create one yourself.")
+                embed = discord.Embed(title="Warn 📝", description=f"**Infractor:** {ctx.author.mention}\n**Reason:** {reason}\n**User warned:**{member.mention}", color=0x2F3136)
+
+                await channel.send(embed=embed)
+
+
 
                 
             

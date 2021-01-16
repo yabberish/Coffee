@@ -20,6 +20,8 @@ for file in os.listdir("cogs"):
         name = file[:-3]
         bot.load_extension(f"cogs.{name}")
 
+print("Ready!")
+
 bot_token = environ.get('token')
 bot.run(bot_token)
 
