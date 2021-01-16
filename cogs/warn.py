@@ -80,7 +80,7 @@ class warn(commands.Cog):
                 if channel is None:
                  msg = await ctx.send("Log channel not found, creating one for you...")
                  channel = await guild.create_text_channel('coffee-logs')
-                 await ctx.channel.set_permissions(ctx.guild.default_role, 
+                 await channel.set_permissions(ctx.guild.default_role, 
                  send_messages=False, read_messages=False)
                  await asyncio.sleep(3)
                  await msg.edit(content="Done! #coffee-logs")
