@@ -5,6 +5,8 @@ __pycache__
 # environment stuff
 venv/
 .env
+.replit
 
 # database related
 database/database.db
+
