@@ -1,5 +1,5 @@
 {
-  "token": "NzY2NjYyNjExNjg4NzUxMTI0.X4moMg._C5w8gkuD-cNBNpFI_AihDxzpn4",
+  "token": "tHis-.1nOta.8Rea9L..9tO2keN",
   "join_message": "Thanks for inviting me! My prefix is `;;`, use `;;help`, if you wanna know how to use my commands!",
   "owners": [
     738604939957239930
@@ -7,7 +7,4 @@
   "prefix": [
     ";;"
   ],
-  "activity": "for ;;h",
-  "activity_type": "watching",
-  "version": "0.0.2"
 }

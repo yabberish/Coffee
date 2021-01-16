@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 import sqlite3
 from datetime import datetime
+from utils import default
 conn = sqlite3.connect('database/database.db')
 time_format = '%Y-%m-%d %H:%M:%S'
 
@@ -49,7 +50,7 @@ def pretty_date(time=False):
 
 c = conn.cursor()
 
-class Warn(commands.Cog):
+class warn(commands.Cog):
     def __init__(self, bot):
         self.bot=bot
 
@@ -80,4 +81,4 @@ class Warn(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Warn(bot))
+    bot.add_cog(warn(bot))

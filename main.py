@@ -1,16 +1,16 @@
 import os
 import discord
 
-from utils import default
-from utils.data import Bot
+from utils.shard import Bot
 from pretty_help import PrettyHelp
+from os import environ
 
-config = default.config()
-print("Logging in...")
+
+print("Ready!")
 
 bot = Bot(
-    command_prefix=config["prefix"], prefix=config["prefix"],
-    owner_ids=config["owners"],help_command=PrettyHelp(), command_attrs=dict(hidden=True),
+    command_prefix=environ.get("prefix"), prefix=environ.get('prefix'),
+    owner_ids=environ.get('owners'),help_command=PrettyHelp(), command_attrs=dict(hidden=True),
     intents=discord.Intents(
         guilds=True, members=True, messages=True, reactions=True, presences=True
     )
@@ -21,7 +21,8 @@ for file in os.listdir("cogs"):
         name = file[:-3]
         bot.load_extension(f"cogs.{name}")
 
-try:
-    bot.run(config["token"])
-except Exception as e:
-    print(f'Error when logging in: {e}')
+environ.get('token')
+
+
+
+
