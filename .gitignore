@@ -1,5 +1,10 @@
 venv/
 .env
 
+
+venv/
 database/
 database.db
+
+venv/
+.replit
