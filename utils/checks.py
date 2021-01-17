@@ -2,13 +2,6 @@ import discord
 from discord.ext import commands
 from os import environ
 
-owners = [738604939957239930]
-
-
-def is_owner(ctx):
-    return ctx.author.id in owners
-
-
 async def check_permissions(ctx, perms, *, check=all):
     if ctx.author.id in owners:
         return True
