@@ -5,6 +5,7 @@ import asyncio
 from discord.ext import commands
 from utils import checks
 
+# https://github.com/Rapptz/RoboDanny/blob/rewrite/cogs/mod.py <--- Source
 class MemberID(commands.Converter):
     async def convert(self, ctx, argument):
         try:
