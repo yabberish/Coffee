@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from os import environ
 
-owners = environ.get("owners")
+owners = [738604939957239930]
 
 
 def is_owner(ctx):
@@ -26,24 +26,24 @@ def has_permissions(*, check=all, **perms):
 async def check_priv(ctx, member):
     try:
         if member == ctx.author:
-            return await ctx.send(f"You've played yourself... oh wait")
+            await ctx.send(f"You've played yourself... oh wait")
         if member.id == ctx.bot.user.id:
-            return await ctx.send("Why do you hate me so much...")
+            await ctx.send("Why do you hate me so much...")
 
         if ctx.author.id == ctx.guild.owner.id:
             return False
 
         if member.id in owners:
             if ctx.author.id not in owners:
-                return await ctx.send(f"I can't {ctx.command.name} a bot developer...")
+                await ctx.send(f"I can't {ctx.command.name} a bot developer...")
             else:
                 pass
         if member.id == ctx.guild.owner.id:
-            return await ctx.send(f"You can't {ctx.command.name} the server owner.")
+            await ctx.send(f"You can't {ctx.command.name} the server owner.")
         if ctx.author.top_role == member.top_role:
-            return await ctx.send(f"Sorry, You cannot {ctx.command.name} someone who has the same role as you...")
+            await ctx.send(f"Sorry, You cannot {ctx.command.name} someone who has the same role as you...")
         if ctx.author.top_role < member.top_role:
-            return await ctx.send(f"Sorry, but you can't {ctx.command.name} someone with a higher role than you...")
+            await ctx.send(f"Sorry, but you can't {ctx.command.name} someone with a higher role than you...")
     except Exception:
         pass
 
