@@ -46,6 +46,11 @@ class Mod(commands.Cog):
              return
 
       try:
+          try:
+              await member.send(f"You have been kicked from {ctx.guild.name} for {reason}")
+          # ignores users with dm's off.
+          except discord.HTTPException:
+              pass
           await member.kick(reason=default.responsible(ctx.author, reason))
           await ctx.send(default.actionmessage("Kicked."))
       except Exception as e:
