@@ -41,16 +41,23 @@ class Mod(commands.Cog):
     @commands.guild_only()
     @checks.has_permissions(kick_members=True)
     async def kick(self, ctx, member: discord.Member, *,   reason: str = None):
-      """ Kicks a user. """
+      """ Kicks a user from the server. """
       if await checks.check_priv(ctx, member):
              return
-
       try:
           await member.kick(reason=default.responsible(ctx.author, reason))
-          await ctx.send(default.actionmessage("Kicked."))
+          embed = discord.Embed(
+            title = "👟",
+            description = f"**{member.name}#{member.discriminator}** Has been kicked from the server for **{reason}",
+            color = 0x2F3136
+          )
+          embed.set_footer(text=f"Command invoked by {ctx.author.name}")
+          embed.set_thumbnail(url=member.avatar_url)
+          await ctx.send(embed=embed)
       except Exception as e:
           await ctx.send(e)
 
+# TODO: add logging context
 
 
 def setup(bot):

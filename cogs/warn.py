@@ -88,27 +88,6 @@ class WarnCommand(commands.Cog):
                 embed = discord.Embed(title="Warn 📝", description=f"**Infractor:** {ctx.author.mention}\n**Reason:** {reason}\n**User warned:**{member.mention}", color=0x2F3136)
 
                 await channel.send(embed=embed)
-
-   """ @commands.command(aliases=['warns', 'infracts'])
-    @commands.guild_only()
-    @commands.has_permissions(manage_messages=True)
-    async def infractions(self, ctx, member: discord.Member):
-        infracts = self.db.fetchrow("SELECT * FROM Warns WHERE user_id=?, reason=?", (user_id, reason))
-        if infracts:
-         return infracts["user_id"]
-        if ctx.author.id in infracts:
-          embed = discord.Embed(
-            color=0x2F3136,
-            description=f"**<@{user_id}>'s Warnings.\n\n\n{reason}**")
-          embed.set_author(name=f"{member.name}'s infractions:", icon_url=str(member.avatar_url))
-          await ctx.send(embed=embed)
-        else:
-            embed = discord.Embed(
-                color=0x2F3136,
-            )
-
-            embed.set_author(name=f"{member.name} has no {ctx.invoked_with}!", icon_url=str(member.avatar_url))
-            await ctx.send(embed=embed) """
         # TODO: Finish infracts command
 
 

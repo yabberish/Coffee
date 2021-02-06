@@ -7,13 +7,6 @@ import timeago as timesince
 from io import BytesIO
 
 
-def config(filename: str = "config"):
-    """ Fetch default config file """
-    try:
-        with open(f"{filename}.json", encoding='utf8') as data:
-            return json.load(data)
-    except FileNotFoundError:
-        raise FileNotFoundError("JSON file wasn't found")
 
 
 def traceback_maker(err, advance: bool = True):
