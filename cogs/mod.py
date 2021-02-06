@@ -4,10 +4,7 @@ import asyncio
 
 from discord.ext import commands
 from utils import checks, default
-
-
-
-
+from utils.database import sqlite, create_tables
 
 
 
@@ -38,11 +35,23 @@ class ActionReason(commands.Converter):
 class Moderation(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.db = sqlite.Database()
+    
+    def logs(self, guild_id):
+        data = self.db.fetchrow("SELECT * FROM Logging WHERE guild_id=?", (guild_id,))
+        if data:
+            return data["logs_id"]
+        else:
+            return None
+    @commands.command()
+    async def test(self, ctx):
+      logss = self.logs(ctx.guild.id)
+      await ctx.send(logss)
 
     @commands.command(
       name="kick",
       help="Kick a user from the server!",
-      usage="@bob#8819 posting memes in general"
+      usage="@elf#2169 posting memes in general"
     )
     @commands.guild_only()
     @checks.has_permissions(kick_members=True)
@@ -53,13 +62,21 @@ class Moderation(commands.Cog):
       try:
           await member.kick(reason=default.responsible(ctx.author, reason))
           embed = discord.Embed(
-            title = "👟",
-            description = f"**{member.name}#{member.discriminator}** Has been kicked from the server for **{reason}**",
             color = 0x2F3136
           )
-          embed.set_footer(text=f"Command invoked by {ctx.author}", icon_url=ctx.author.avatar_url)
-          embed.set_author(icon_url=member.avatar_url)
-          await ctx.send(content="✅", embed=embed)
+          embed.set_footer(text=f"Command invoked by {ctx.author}")
+          embed.set_author(name=f"✅ {member.name} has been kicked from the server for {reason}", icon_url=member.avatar_url)
+          await ctx.send(embed=embed)
+          await member.send(f"You've been kicked from **{ctx.guild.name}** for **{reason}** by **{ctx.author}**")
+
+          log_channel = self.bot.get_channel(self.logs(ctx.guild.id))
+          if log_channel:
+            embed = discord.Embed(
+              title="Kick 📝",
+              description=f"**User Kicked:** `{member}`\n**Moderator:** `{ctx.author}`\n**Reason:** `{reason}`"
+            )
+          await log_channel.send(embed=embed)
+
       except Exception as e:
           await ctx.send(e)
     
