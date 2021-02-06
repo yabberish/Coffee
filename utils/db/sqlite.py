@@ -3,10 +3,7 @@ from collections import OrderedDict
 
 
 def dict_factory(cursor, row):
-    d = {}
-    for index, col in enumerate(cursor.description):
-        d[col[0]] = row[index]
-    return d
+    return {col[0]: item for col, item in zip(cursor.description, row)}
 
 
 class Database:
