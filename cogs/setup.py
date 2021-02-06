@@ -13,9 +13,11 @@ class Setup(commands.Cog):
     help = "Setup the bot for the server."
   )
   async def setup_(self, ctx : commands.Context):
-    await ctx.guild.create_text_channel('coffee-logs')
-    logs = discord.utils.get(ctx.guild.channels, name="coffee-logs")
-    await logs.set_permissions(ctx.guild.default_role, send_messages=False, read_messages=False)
+    overwrites = {
+        ctx.guild.default_role: discord.PermissionOverwrite(read_messages=False, send_messages=False),
+        ctx.guild.me: discord.PermissionOverwrite(read_messages=True, send_messages=True)
+    }
+    logs = await ctx.guild.create_text_channel('coffee-logs', overwrites=overwrites)
     log_channel_id = logs.id
     self.db.execute("INSERT INTO Logging VALUES (?, ?)", (ctx.guild.id, logs.id))
     await ctx.send(f"Successfully setup the server, <#{logs.id}>")
