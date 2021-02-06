@@ -8,7 +8,7 @@ Coffee is a discord moderation bot.
   [CODE of CONDUCT](CODE_OF_CONDUCT.md.md)
 
 
-### Self-hosting.
+# Self-hosting.
 
 *Instructions to install the bot for your own personal use*
 
