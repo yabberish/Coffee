@@ -1,6 +1,5 @@
 import os
 import discord
-
 from utils.shards import Bot
 from pretty_help import PrettyHelp
 from os import environ

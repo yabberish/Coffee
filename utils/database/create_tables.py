@@ -1,10 +1,9 @@
 from utils.database import sqlite as db
 
 
-class Warns(db.Table):
-    user_id = db.Column("BIGINT", nullable=False, primary_key=True)
-    guild_id = db.Column("BIGINT", nullable=False)
-    reason = db.Column("TEXT", nullable=False)
+class Logging(db.Table):
+    guild_id = db.Column("BIGINT", nullable=False, primary_key=True)
+    logs_id = db.Column("BIGINT", nullable=False)
 
 
 

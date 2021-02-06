@@ -5,6 +5,12 @@ import asyncio
 from discord.ext import commands
 from utils import checks, default
 
+
+
+
+
+
+
 # https://github.com/Rapptz/RoboDanny/blob/rewrite/cogs/mod.py <--- Source
 class MemberID(commands.Converter):
     async def convert(self, ctx, argument):
@@ -35,12 +41,12 @@ class Moderation(commands.Cog):
 
     @commands.command(
       name="kick",
-      description="Kick a user from the server!",
+      help="Kick a user from the server!",
       usage="@bob#8819 posting memes in general"
     )
     @commands.guild_only()
     @checks.has_permissions(kick_members=True)
-    async def kick(self, ctx, member: discord.Member, *,   reason: str = None):
+    async def kick_(self, ctx : commands.Context, member: discord.Member, *,   reason: str = None):
       """ Kicks a user from the server. """
       if await checks.check_priv(ctx, member):
              return
@@ -53,9 +59,54 @@ class Moderation(commands.Cog):
           )
           embed.set_footer(text=f"Command invoked by {ctx.author.name}")
           embed.set_thumbnail(url=member.avatar_url)
-          await ctx.send(embed=embed)
+          await ctx.send(content="✅", embed=embed)
       except Exception as e:
           await ctx.send(e)
+    
+    @commands.command(
+      name="ban",
+      help="Permanently ban a user from the server.",
+      usage="@bob#8819 posting not safe for work content."
+    )
+    @commands.guild_only()
+    @checks.has_permissions(ban_members=True)
+    async def banish(self, ctx : commands.Context, member: discord.Member, *,   reason: str = None):
+      """ Bans a user from the server. """
+      if await checks.check_priv(ctx, member):
+             return
+      try:
+          await member.ban(reason=default.responsible(ctx.author, reason))
+          embed = discord.Embed(
+            title = "🔨",
+            description = f"**{member.name}#{member.discriminator}** Has been banned from the server for **{reason}",
+            color = 0x2F3136
+          )
+          embed.set_footer(text=f"Command invoked by {ctx.author.name}")
+          embed.set_thumbnail(url=member.avatar_url)
+          await ctx.send(content="✅", embed=embed)
+      except Exception as e:
+          await ctx.send(e)
+    
+    @commands.guild_only()
+    @checks.has_permissions(kick_members=True)
+    async def banish(self, ctx : commands.Context, member: discord.Member, *,   reason: str = None):
+      """ Bans a user from the server. """
+      if await checks.check_priv(ctx, member):
+             return
+      try:
+          await member.ban(reason=default.responsible(ctx.author, reason))
+          embed = discord.Embed(
+            title = "🔨",
+            description = f"**{member.name}#{member.discriminator}** Has been banned from the server for **{reason}",
+            color = 0x2F3136
+          )
+          embed.set_footer(text=f"Command invoked by {ctx.author.name}")
+          embed.set_thumbnail(url=member.avatar_url)
+          await ctx.send(content="✅", embed=embed)
+      except Exception as e:
+          await ctx.send(e)
+
+    
 
 # TODO: add logging context
 
