@@ -56,12 +56,11 @@ class WarnCommand(commands.Cog):
     @commands.group()
     @commands.guild_only()
     @commands.has_permissions(manage_messages=True)
-    async def warn(self, ctx : command.Context, member : discord.Member, *, reason="None"):
+    async def warn(self, ctx : commands.Context, member : discord.Member, *, reason="None"):
         invoker = ctx.author
         if member.id != ctx.author.id:
             if invoker.top_role > member.top_role:
                 self.db.execute("INSERT INTO Warns (user_id, guild_id, reason) VALUES (?, ?, ?)", (member.id, member.guild.id, reason,))
-                conn.commit()
                 embed = discord.Embed(
                     description = f"You've been warned in {member.guild.name}\n**Reason:** {reason}\n**Infractor:** {ctx.author.name}",
                     color = 0x2F3136
