@@ -3,6 +3,8 @@ from discord.ext import commands
 from os import environ
 from utils import default
 
+owners = [738604939957239930]
+
 
 async def check_permissions(ctx, perms, *, check=all):
     if ctx.author.id in owners:
