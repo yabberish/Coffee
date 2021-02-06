@@ -3,6 +3,7 @@ from utils.db import sqlite as db
 
 class Warns(db.Table):
     user_id = db.Column("BIGINT", nullable=False, primary_key=True)
+    guild_id = db.Column("BIGINT", nullable=False)
     reason = db.Column("TEXT", nullable=False)
 
 

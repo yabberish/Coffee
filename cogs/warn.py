@@ -1,9 +1,8 @@
 import discord
 from discord.ext import commands
-import sqlite3
 from datetime import datetime
 from utils import checks
-conn = sqlite3.connect('database/database.db')
+from utils.db import create_tables, sqlite
 time_format = '%Y-%m-%d %H:%M:%S'
 import asyncio
 
@@ -49,20 +48,19 @@ def pretty_date(time=False):
     return str(round(day_diff / 365)) + " years ago"
 
 
-c = conn.cursor()
-
-class warn(commands.Cog):
+class WarnCommand(commands.Cog):
     def __init__(self, bot):
-        self.bot=bot
+        self.bot = bot
+        self.db = sqlite.Database()
 
     @commands.group()
     @commands.guild_only()
     @commands.has_permissions(manage_messages=True)
-    async def warn(self, ctx, member : discord.Member, *, reason="None"):
+    async def warn(self, ctx : command.Context, member : discord.Member, *, reason="None"):
         invoker = ctx.author
         if member.id != ctx.author.id:
             if invoker.top_role > member.top_role:
-                c.execute("INSERT INTO warns (user_id, guild_id, reason) VALUES (?, ?, ?)", (member.id, member.guild.id, reason,))
+                self.db.execute("INSERT INTO Warns (user_id, guild_id, reason) VALUES (?, ?, ?)", (member.id, member.guild.id, reason,))
                 conn.commit()
                 embed = discord.Embed(
                     description = f"You've been warned in {member.guild.name}\n**Reason:** {reason}\n**Infractor:** {ctx.author.name}",
@@ -99,4 +97,4 @@ class warn(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(warn(bot))
+    bot.add_cog(WarnCommand(bot))
