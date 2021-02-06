@@ -4,8 +4,7 @@ from utils.database import create_tables, sqlite
 
  
 tables = create_tables.creation(debug=True)
-if not tables:
-    sys.exit(1)
+
 
 class Setup(commands.Cog):
   def __init__(self, bot):
