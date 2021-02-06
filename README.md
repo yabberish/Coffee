@@ -1,3 +1,12 @@
+# Coffee
+Coffee is a discord moderation bot.
+
+# Links
+
+[Contributiong](CONTRIBUTING.md)
+[CODE of CONDUCT](CODE_OF_CONDUCT.md.md)
+
+
 ### Self-hosting.
 
 *Instructions to install the bot for your own personal use*
