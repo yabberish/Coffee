@@ -5,6 +5,11 @@ class Logging(db.Table):
     guild_id = db.Column("BIGINT", nullable=False, primary_key=True)
     logs_id = db.Column("BIGINT", nullable=False)
 
+class Starboard(db.Table):
+    guild_id = db.Column("BIGINT", nullable=False, primary_key=True)
+    starboard_id = db.Column("BIGINT", nullable=False)
+    stars = db.Column("INT", nullable=False)
+
 
 
 def creation(debug: bool = False):
