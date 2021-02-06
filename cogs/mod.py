@@ -43,10 +43,6 @@ class Moderation(commands.Cog):
             return data["logs_id"]
         else:
             return None
-    @commands.command()
-    async def test(self, ctx):
-      logss = self.logs(ctx.guild.id)
-      await ctx.send(logss)
 
     @commands.command(
       name="kick",
@@ -65,7 +61,7 @@ class Moderation(commands.Cog):
             color = 0x2F3136
           )
           embed.set_footer(text=f"Command invoked by {ctx.author}")
-          embed.set_author(name=f"✅ {member.name} has been kicked from the server for {reason}", icon_url=member.avatar_url)
+          embed.set_author(name=f"✅ {member.name} has been kicked from the server", icon_url=member.avatar_url)
           await ctx.send(embed=embed)
           await member.send(f"You've been kicked from **{ctx.guild.name}** for **{reason}** by **{ctx.author}**")
 
@@ -79,11 +75,11 @@ class Moderation(commands.Cog):
 
       except Exception as e:
           await ctx.send(e)
-    
+
     @commands.command(
       name="ban",
-      help="Permanently ban a user from the server.",
-      usage="@bob#8819 posting not safe for work content."
+      help="Ban a user from the server.",
+      usage="@elf#2169 being an idiot >:("
     )
     @commands.guild_only()
     @checks.has_permissions(ban_members=True)
@@ -94,38 +90,25 @@ class Moderation(commands.Cog):
       try:
           await member.ban(reason=default.responsible(ctx.author, reason))
           embed = discord.Embed(
-            title = "🔨",
-            description = f"**{member.name}#{member.discriminator}** Has been banned from the server for **{reason}",
             color = 0x2F3136
           )
-          embed.set_footer(text=f"Command invoked by {ctx.author.name}")
-          embed.set_thumbnail(url=member.avatar_url)
-          await ctx.send(content="✅", embed=embed)
+          embed.set_footer(text=f"Command invoked by {ctx.author}")
+          embed.set_author(name=f"✅ {member.name} has been banned from the server", icon_url=member.avatar_url)
+          await ctx.send(embed=embed)
+          await member.send(f"You've been banned from **{ctx.guild.name}** for **{reason}** by **{ctx.author}**")
+
+          log_channel = self.bot.get_channel(self.logs(ctx.guild.id))
+          if log_channel:
+            embed = discord.Embed(
+              title="Ban 📝",
+              description=f"**User banned:** `{member}`\n**Moderator:** `{ctx.author}`\n**Reason:** `{reason}`"
+            )
+          await log_channel.send(embed=embed)
+
       except Exception as e:
           await ctx.send(e)
     
-    @commands.guild_only()
-    @checks.has_permissions(kick_members=True)
-    async def banish(self, ctx : commands.Context, member: discord.Member, *,   reason: str = None):
-      """ Bans a user from the server. """
-      if await checks.check_priv(ctx, member):
-             return
-      try:
-          await member.ban(reason=default.responsible(ctx.author, reason))
-          embed = discord.Embed(
-            title = "🔨",
-            description = f"**{member.name}#{member.discriminator}** Has been banned from the server for **{reason}",
-            color = 0x2F3136
-          )
-          embed.set_footer(text=f"Command invoked by {ctx.author.name}")
-          embed.set_thumbnail(url=member.avatar_url)
-          await ctx.send(content="✅", embed=embed)
-      except Exception as e:
-          await ctx.send(e)
-
     
-
-# TODO: add logging context
 
 
 def setup(bot):
