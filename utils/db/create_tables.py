@@ -1,10 +1,10 @@
 from utils.database import sqlite as db
 
 
-class Accounts(db.Table):
+class Warns(db.Table):
     user_id = db.Column("BIGINT", nullable=False, primary_key=True)
-    bakery_name = db.Column("TEXT", nullable=False)
-    cakes = db.Column("BIGINT", nullable=False, primary_key=True)
+    reason = db.Column("TEXT", nullable=False)
+
 
 
 def creation(debug: bool = False):
