@@ -1,6 +1,8 @@
 import discord
 from discord.ext import commands
 from os import environ
+from utils import default
+
 
 async def check_permissions(ctx, perms, *, check=all):
     if ctx.author.id in owners:
