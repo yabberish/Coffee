@@ -54,11 +54,11 @@ class Moderation(commands.Cog):
           await member.kick(reason=default.responsible(ctx.author, reason))
           embed = discord.Embed(
             title = "👟",
-            description = f"**{member.name}#{member.discriminator}** Has been kicked from the server for **{reason}",
+            description = f"**{member.name}#{member.discriminator}** Has been kicked from the server for **{reason}**",
             color = 0x2F3136
           )
-          embed.set_footer(text=f"Command invoked by {ctx.author.name}")
-          embed.set_thumbnail(url=member.avatar_url)
+          embed.set_footer(text=f"Command invoked by {ctx.author}", icon_url=ctx.author.avatar_url)
+          embed.set_author(icon_url=member.avatar_url)
           await ctx.send(content="✅", embed=embed)
       except Exception as e:
           await ctx.send(e)
