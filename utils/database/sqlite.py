@@ -2,6 +2,7 @@ import sqlite3
 from collections import OrderedDict
 
 
+
 def dict_factory(cursor, row):
     return {col[0]: item for col, item in zip(cursor.description, row)}
 
