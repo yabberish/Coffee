@@ -1,4 +1,4 @@
-from utils.db import sqlite as db
+from utils.database import sqlite as db
 
 
 class Warns(db.Table):
