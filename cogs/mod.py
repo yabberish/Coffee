@@ -29,7 +29,7 @@ class ActionReason(commands.Converter):
         return ret
 
 
-class Mod(commands.Cog):
+class Moderation(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -61,4 +61,4 @@ class Mod(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Mod(bot))
+    bot.add_cog(Moderation(bot))
