@@ -3,9 +3,9 @@ Coffee is a discord moderation bot.
 
 # Links
 
-  [Contributing](CONTRIBUTING.md)
+  [Contributing](docs/CONTRIBUTING.md)
   
-  [CODE of CONDUCT](CODE_OF_CONDUCT.md.md)
+  [CODE of CONDUCT](docs/CODE_OF_CONDUCT.md.md)
 
 
 # Self-hosting.
