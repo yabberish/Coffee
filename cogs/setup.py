@@ -11,8 +11,6 @@ class Setup(commands.Cog):
     self.bot = bot
     self.db = sqlite.Database()
 
-   
-
   @commands.command(
     name = "setup",
     help = "Setup the bot for the server."
@@ -21,6 +19,7 @@ class Setup(commands.Cog):
     await ctx.guild.create_text_channel('coffee-logs')
     logs = discord.utils.get(ctx.guild.channels, name="coffee-logs")
     log_channel_id = logs.id
+    await ctx.log_channel_id.set_permissions(ctx.guild.default_role, send_messages=False, read_messages=False)
     self.db.execute("INSERT INTO Logging VALUES (?, ?)", (ctx.guild.id, logs.id))
     await ctx.send("Successfully setup the server!")
 
