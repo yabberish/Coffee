@@ -12,7 +12,7 @@ def dict_factory(cursor, row):
 class Database:
     def __init__(self):
         self.conn = sqlite3.connect(
-            "data.db", isolation_level=None, detect_types=sqlite3.PARSE_DECLTYPES
+            "database.db", isolation_level=None, detect_types=sqlite3.PARSE_DECLTYPES
         )
         self.conn.row_factory = dict_factory
         self.db = self.conn.cursor()

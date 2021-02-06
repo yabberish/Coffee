@@ -8,5 +8,4 @@ venv/
 .replit
 
 # database related
-database/database.db
-
+database.db
