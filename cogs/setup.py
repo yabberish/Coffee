@@ -29,17 +29,17 @@ class Setup(commands.Cog):
     self.db.execute("INSERT INTO Logging VALUES (?, ?)", (ctx.guild.id, logs.id))
     await ctx.send(f"Successfully setup the server, <#{logs.id}>")
   
-  @setup.command()
-  @commands.has_permissions(manage_guild=True)
-  async def starboard(self, ctx : commands.Context, stars=int(3)):
-    overwrites = {
-        ctx.guild.default_role: discord.PermissionOverwrite(read_messages=True, send_messages=False),
-        ctx.guild.me: discord.PermissionOverwrite(read_messages=True, send_messages=True)
-    }
-    starboard = await ctx.guild.create_text_channel('starboard', overwrites=overwrites)
-    starboard_channel_id = starboard.id
-    self.db.execute("INSERT INTO Starboard VALUES (?, ?, ?)", (ctx.guild.id, starboard_channel_id, stars))
-    await ctx.send(f"Successfully setup starboard with a star count of **{stars}**, <#{starboard_channel_id}>")
+ # @setup.command()
+ # @commands.has_permissions(manage_guild=True)
+ # async def starboard(self, ctx : commands.Context, stars=int(3)):
+ #   overwrites = {
+       # ctx.guild.default_role: discord.PermissionOverwrite(read_messages=True, send_messages=False),
+       # ctx.guild.me: discord.PermissionOverwrite(read_messages=True, send_messages=True)
+ #   }
+ #   starboard = await ctx.guild.create_text_channel('starboard', overwrites=overwrites)
+ #   starboard_channel_id = starboard.id
+ #   self.db.execute("INSERT INTO Starboard VALUES (?, ?, ?)", (ctx.guild.id, starboard_channel_id, stars))
+ #   await ctx.send(f"Successfully setup starboard with a star count of **{stars}**, <#{starboard_channel_id}>")
     
 
 

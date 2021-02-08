@@ -15,20 +15,6 @@ class Events(commands.Cog):
         else:
             return None
   
-  def starboard_channel(self, guild_id):
-    data = self.db.fetchrow("SELECT * FROM Starboard WHERE guild_id=?", (guild_id,))
-    if data:
-       return data["starboard_id"]
-    else:
-       return None
-  
-  def starboard_stars(self, guild_id):
-    data = self.db.fetchrow("SELECT * FROM Starboard WHERE guild_id=?", (guild_id,))
-    if data:
-       return data["stars"]
-    else:
-       return None
-  
   @commands.Cog.listener()
   async def on_message_delete(self, message):
    log_channel = self.bot.get_channel(self.logs(message.guild.id))
@@ -54,21 +40,8 @@ class Events(commands.Cog):
      )
      embed.timestamp = before.created_at
      await log_channel.send(embed=embed)
+
   
-  @commands.Cog.listener()
-  async def on_reaction_add(self, reaction):
-    if (reaction.emoji == '⭐') and (reaction.count >= self.starboard_stars(reaction.message.guild.id)):
-      embed = discord.Embed(
-        title = f"Starboard",
-        description=reaction.message.content)        
-      
-      if len(reaction.message.attachments) > 0:
-        embed.set_image(url = reaction.message.attachments[0].url)
-        
-      embed.set_footer(text = f" ⭐ {reaction.count}")
-      embed.timestamp = datetime.datetime.utcnow()
-      starboard = self.bot.get_channel(self.starboard_channel(reaction.guild.id))
-      await starboard.send(embed = embed)
 
 def setup(bot):
   bot.add_cog(Events(bot))

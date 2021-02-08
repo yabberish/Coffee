@@ -1,7 +1,6 @@
 import discord
 import re
 import asyncio
-
 from discord.ext import commands
 from utils import checks, default
 from utils.database import sqlite, create_tables
@@ -69,7 +68,8 @@ class Moderation(commands.Cog):
           if log_channel:
             embed = discord.Embed(
               title="Kick 📝",
-              description=f"**User Kicked:** `{member}`\n**Moderator:** `{ctx.author}`\n**Reason:** `{reason}`"
+              description=f"**User Kicked:** `{member}`\n**Moderator:** `{ctx.author}`\n**Reason:** `{reason}`",
+              color=0x2F3136
             )
           await log_channel.send(embed=embed)
 
@@ -101,12 +101,38 @@ class Moderation(commands.Cog):
           if log_channel:
             embed = discord.Embed(
               title="Ban 📝",
-              description=f"**User banned:** `{member}`\n**Moderator:** `{ctx.author}`\n**Reason:** `{reason}`"
+              description=f"**User banned:** `{member}`\n**Moderator:** `{ctx.author}`\n**Reason:** `{reason}`",
+              color=0x2F3136
             )
           await log_channel.send(embed=embed)
 
       except Exception as e:
           await ctx.send(e)
+    
+    @commands.command()
+    @commands.guild_only()
+    @checks.has_permissions(ban_members=True)
+    async def unban(self, ctx, member: MemberID, *, reason: str = None):
+        """ Unban a user. """
+        try:
+            await ctx.guild.unban(discord.Object(id=member), reason=default.responsible(ctx.author, reason))
+            embed = discord.Embed(
+              color=0x2F3136
+            )
+            embed.set_footer(text=f"Command invoked by {ctx.author}")
+            embed.set_author(name=f"✅ Unbanned!")
+            await ctx.send(embed=embed)
+
+            log_channel = self.bot.get_channel(self.logs(ctx.guild.id))
+            if log_channel:
+              embed = discord.Embed(
+               title="Unban 📝",
+               description=f"**User unbanned:** `{member}`\n**Moderator:** `{ctx.author}`\n**Reason:** `{reason}`",
+               color=0x2F3136
+             )
+            await log_channel.send(embed=embed)
+        except Exception as e:
+            await ctx.send(e)
     
     
 
