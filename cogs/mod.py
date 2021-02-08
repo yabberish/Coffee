@@ -8,7 +8,7 @@ from utils.database import sqlite, create_tables
 
 
 
-# https://github.com/Rapptz/RoboDanny/blob/rewrite/cogs/mod.py <--- Source
+# https://github.com/Rapptz/RoboDanny/blob/rewrite/cogs/mod.py
 class MemberID(commands.Converter):
     async def convert(self, ctx, argument):
         try:

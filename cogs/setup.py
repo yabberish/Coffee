@@ -36,10 +36,10 @@ class Setup(commands.Cog):
         ctx.guild.default_role: discord.PermissionOverwrite(read_messages=True, send_messages=False),
         ctx.guild.me: discord.PermissionOverwrite(read_messages=True, send_messages=True)
     }
-    logs = await ctx.guild.create_text_channel('starboard', overwrites=overwrites)
+    starboard = await ctx.guild.create_text_channel('starboard', overwrites=overwrites)
     starboard_channel_id = starboard.id
-    self.db.execute("INSERT INTO Starboard VALUES (?, ?, ?)", (ctx.guild.id, starboard.id, stars))
-    await ctx.send(f"Successfully setup starboard with a star count of **{stars}**, <#{starboard.id}>")
+    self.db.execute("INSERT INTO Starboard VALUES (?, ?, ?)", (ctx.guild.id, starboard_channel_id, stars))
+    await ctx.send(f"Successfully setup starboard with a star count of **{stars}**, <#{starboard_channel_id}>")
     
 
 
