@@ -1,5 +1,5 @@
 # Coffee
-Coffee is a discord moderation bot.
+Coffee is a discord moderation bot made by elflanded.
 
 # Links
 
@@ -12,24 +12,32 @@ Coffee is a discord moderation bot.
 
 *Instructions to install the bot for your own personal use*
 
-Install the repository, then unzip it.
+Start by cloning the repository using the following command:
+```sh
+git clone https://github.com/elfq/Coffee.git
+```
 
 Then rename `.env.example` to `.env` and open it with a text editor, and change the values.
 
 *you may need to check if you can view hidden files on windows to access this file!!!*
 
-```
-DISCORD_TOKEN= 
-DISCORD_PREFIX=      
+```py
+DISCORD_TOKEN=your_token
+DISCORD_PREFIX=your_prefix
 ```
 
 Don't include any quotes when setting your values!
 
 **Windows Setup**
 
-Once you're done setting up .env, go to the folder again, and open the `setup.bat` file, then it will setup itself!
+Once you're done setting up .env, go to the folder again, and open the `setup.bat` file, then it will setup itself. Alternatively you can run:
 
-**Linux & Mac Setup**
+```sh
+venv\Scripts\activate.bat
+py -3 -m pip install -r requirements.txt
+```
+
+**MacOS & Linux setup:**
 
 Open up terminal, and locate the folder, once you've located it run the following command.
 
