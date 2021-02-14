@@ -10,7 +10,7 @@ bot = Bot(
     name="Coffee",
     command_prefix=";;",
     allowed_mentions=AllowedMentions(
-        everyone=False, roles=False, users=True, replied_user=True
+        everyone=False, roles=False, users=True
     ),
     help_command=fancyhelp.EmbeddedHelpCommand(color=0x73D3B3),
     activity=Game("with logs 📝"),
