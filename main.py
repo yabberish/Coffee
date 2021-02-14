@@ -1,30 +1,31 @@
-import os
+from templatebot import Bot
+from discord import AllowedMentions, Activity, Game
+from os import environ as env
+from dotenv import load_dotenv
 import discord
-from utils.shards import Bot
-from os import environ
-
+from discord.ext import fancyhelp
 
 
 bot = Bot(
-    command_prefix=environ.get("prefix"), prefix=environ.get('prefix'),
-    owner_ids=environ.get('owners'), command_attrs=dict(hidden=True),
-    intents=discord.Intents(
-        guilds=True, members=True, messages=True, reactions=True, presences=True),allowed_mentions=discord.AllowedMentions(roles=False, users=True, everyone=False)
+    name="Coffee",
+    command_prefix=";;",
+    allowed_mentions=AllowedMentions(
+        everyone=False, roles=False, users=True, replied_user=True
+    ),
+    help_command=fancyhelp.EmbeddedHelpCommand(color=0x73D3B3),
+    activity=Game("with logs 📝"),
 )
-bot.remove_command("help")
-for file in os.listdir("cogs"):
-    if file.endswith(".py"):
-        name = file[:-3]
-        bot.load_extension(f"cogs.{name}")
+
+bot.VERSION = "1.0.0"
+
+bot.load_initial_cogs(
+    "cogs.logs", "cogs.mod", "cogs.setup"
+)
 
 @bot.event
 async def on_command_error(ctx, error):
- await ctx.send(error) # Lazy error_handling, will be changed soon!
+ await ctx.send(f"💥 {error}")
+  # Lazy error_handling, will be changed soon!
 
 
-bot_token = environ.get('token')
-bot.run(bot_token)
-
-
-
-
+bot.run(env.get("TOKEN", None))

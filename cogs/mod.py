@@ -45,8 +45,7 @@ class Moderation(commands.Cog):
 
     @commands.command(
       name="kick",
-      help="Kick a user from the server!",
-      usage="@elf#2169 posting memes in general"
+      help="Kick a user from the server."
     )
     @commands.guild_only()
     @checks.has_permissions(kick_members=True)
@@ -78,8 +77,7 @@ class Moderation(commands.Cog):
 
     @commands.command(
       name="ban",
-      help="Ban a user from the server.",
-      usage="@elf#2169 being an idiot >:("
+      help="Ban a user from the server."
     )
     @commands.guild_only()
     @checks.has_permissions(ban_members=True)
@@ -109,10 +107,13 @@ class Moderation(commands.Cog):
       except Exception as e:
           await ctx.send(e)
     
-    @commands.command()
+    @commands.command(
+      name="unban",
+      help="Unban a user from your server."
+    )
     @commands.guild_only()
     @checks.has_permissions(ban_members=True)
-    async def unban(self, ctx, member: MemberID, *, reason: str = None):
+    async def unban_(self, ctx, member: MemberID, *, reason: str = None):
         """ Unban a user. """
         try:
             await ctx.guild.unban(discord.Object(id=member), reason=default.responsible(ctx.author, reason))
