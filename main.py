@@ -19,7 +19,7 @@ bot = Bot(
 bot.VERSION = "1.0.0"
 
 bot.load_initial_cogs(
-    "cogs.logs", "cogs.mod", "cogs.setup"
+    "cogs.logs", "cogs.mod", "cogs.setup", "cogs.top-gg"
 )
 
 @bot.event
