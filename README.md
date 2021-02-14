@@ -1,6 +1,3 @@
-# Coffee
-Coffee is a discord moderation bot made by elflanded.
-
 ![CoffeeCat](https://media.discordapp.net/attachments/806781413809455134/810557761003847711/source.png)
 
 
