@@ -5,7 +5,7 @@
 
 If you would like to invite this bot to your server, then [click here](https://top.gg/bot/766662611688751124). 
 
-# Self-hosting.
+### Self-hosting
 
 *Instructions to install the bot for your own personal use*
 
