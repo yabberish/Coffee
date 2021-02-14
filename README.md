@@ -20,6 +20,7 @@ Then rename `.env.example` to `.env` and open it with a text editor, and change 
 
 ```py
 TOKEN=your_token
+DBLToken=your_dbl_token
 ```
 
 Don't include any quotes when setting your values!
