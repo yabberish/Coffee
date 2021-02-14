@@ -1,12 +1,12 @@
 # Coffee
 Coffee is a discord moderation bot made by elflanded.
 
-# Links
+![CoffeeCat](https://media.discordapp.net/attachments/806781413809455134/810557761003847711/source.png)
 
-  [Contributing](docs/CONTRIBUTING.md)
-  
-  [CODE of CONDUCT](docs/CODE_OF_CONDUCT.md.md)
 
+### Public Instance
+
+If you would like to invite this bot to your server, then [click here](https://top.gg/bot/766662611688751124). 
 
 # Self-hosting.
 
