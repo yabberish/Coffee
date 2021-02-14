@@ -22,8 +22,7 @@ Then rename `.env.example` to `.env` and open it with a text editor, and change 
 *you may need to check if you can view hidden files on windows to access this file!!!*
 
 ```py
-DISCORD_TOKEN=your_token
-DISCORD_PREFIX=your_prefix
+TOKEN=your_token
 ```
 
 Don't include any quotes when setting your values!
