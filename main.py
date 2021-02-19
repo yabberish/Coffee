@@ -16,7 +16,7 @@ bot = Bot(
     activity=Game("with logs 📝"),
 )
 
-bot.VERSION = "1.69.420"
+bot.VERSION = "2.0.0"
 
 bot.load_initial_cogs(
     "cogs.logs", "cogs.mod", "cogs.setup", "cogs.top-gg"
