@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 import asyncio
 import logging
 
-
+load_dotenv('.env')
 class TopGG(commands.Cog):
     """Handles interactions with the top.gg API"""
 
