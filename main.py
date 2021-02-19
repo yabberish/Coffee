@@ -12,7 +12,7 @@ bot = Bot(
     allowed_mentions=AllowedMentions(
         everyone=False, roles=False, users=True
     ),
-    help_command=fancyhelp.EmbeddedHelpCommand(color=0x73D3B3),
+    help_command=fancyhelp.EmbeddedHelpCommand(color=0x2F3136),
     activity=Game("with logs 📝"),
 )
 
