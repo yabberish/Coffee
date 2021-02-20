@@ -41,6 +41,20 @@ class Events(commands.Cog):
      embed.timestamp = before.created_at
      await log_channel.send(embed=embed)
 
+  @commands.Cog.listener()
+  async def on_member_update(self, before, after):
+   log_channel = self.bot.get_channel(self.logs(before.guild.id))
+   if before.author.bot is True:
+     return None
+   if log_channel:
+     embed = discord.Embed(
+     title="Nickname Changed 📝",
+     description=f"\n**User** `{before.author}`\n**Before:** ```{before.nickname}```\n**Now:** ```{after.nickname}```",
+     color=0x2F3136
+     )
+     embed.timestamp = before.created_at
+     await log_channel.send(embed=embed)
+
   
 
 def setup(bot):
