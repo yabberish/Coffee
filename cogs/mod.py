@@ -137,7 +137,7 @@ class Moderation(commands.Cog):
 
     @commands.command(
       name="prune",
-      aliases=["clear", "purge"]
+      aliases=["clear", "purge"],
       help="Clear a inputted amount of messages in your server."
     )
     @commands.guild_only()
