@@ -135,11 +135,10 @@ class Moderation(commands.Cog):
         except Exception as e:
             await ctx.send(e)
 
-    @command.command(aliases = ["clear"], help = "Clear a x amount of messages in chat.")
+    @command.command(name = "purge", aliases = ["clear", "prune"], help = "Clear a x amount of messages in chat.")
     @commands.max_concurrency(1, per=commands.BucketType.guild)
     @permissions.has_permissions(manage_messages=True)
-    async def purge(self, ctx):
-    async def do_removal(self, ctx, limit, predicate, *, before=None, after=None, message=True):
+    async def purge_(self, ctx, limit, predicate, *, before=None, after=None, message=True):
         if limit > 2000:
             return await ctx.send(f'Too many messages to search given ({limit}/2000)')
 
