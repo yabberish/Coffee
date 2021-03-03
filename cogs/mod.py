@@ -165,6 +165,8 @@ class Moderation(commands.Cog):
        await log_channel.send(embed=embed)
        await asyncio.sleep(2)
        await log_channel.send(file=transcript_file)
+    except Exception as e:
+            await ctx.send(e)
 
 
     
