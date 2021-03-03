@@ -134,6 +134,49 @@ class Moderation(commands.Cog):
             await log_channel.send(embed=embed)
         except Exception as e:
             await ctx.send(e)
+
+    @command.command(aliases = ["clear"], help = "Clear a x amount of messages in chat.")
+    @commands.max_concurrency(1, per=commands.BucketType.guild)
+    @permissions.has_permissions(manage_messages=True)
+    async def purge(self, ctx):
+    async def do_removal(self, ctx, limit, predicate, *, before=None, after=None, message=True):
+        if limit > 2000:
+            return await ctx.send(f'Too many messages to search given ({limit}/2000)')
+
+        if not before:
+            before = ctx.message
+        else:
+            before = discord.Object(id=before)
+
+        if after:
+            after = discord.Object(id=after)
+
+        try:
+            deleted = await ctx.channel.purge(limit=limit, before=before, after=after, check=predicate)
+        except discord.Forbidden:
+            return await ctx.send('I do not have permissions to delete messages.')
+        except discord.HTTPException as e:
+            return await ctx.send(f'Error: {e} (try a smaller search?)')
+
+
+        deleted = len(deleted)
+        transcript = await chat_exporter.export(ctx.channel, limit=deleted, tz_info)
+            transcript_file = discord.File(io.BytesIO(transcript.encode()), filename=f"coffee-transcript-{ctx.channel.name}.html")
+        if message is True:
+            embed = discord.Embed(color = 0x2F3136)
+            embed.set_author(name = f"✅ Successfully pruned {deleted} messages.")
+            embed.set_footer(text=f"Command invoked by {ctx.author}")
+            await ctx.send(embed=embed)
+
+           log_channel = self.bot.get_channel(self.logs(ctx.guild.id))
+           if log_channel:
+             embed = discord.Embed(
+               title="Unban 📝",
+               description=f"**Messages deleted:** `{deleted}`\n**Moderator:** {ctx.author}\n**Channel Transcript:**`",
+               color=0x2F3136)
+            await log_channel.send(embed=embed)
+            await asyncio.sleep(2)
+            await log_channel.send(file=transcript_file)
     
     
 
