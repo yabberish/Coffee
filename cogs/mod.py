@@ -135,6 +135,38 @@ class Moderation(commands.Cog):
         except Exception as e:
             await ctx.send(e)
 
+    @commands.command(
+      name="prune",
+      aliases=["clear", "purge"]
+      help="Clear a inputted amount of messages in your server."
+    )
+    @commands.guild_only()
+    @checks.has_permissions(manage_messages=True)
+    async def prune_(self, ctx, amount=25)):
+      channel = ctx.message.channel
+      messages = []
+      async for message in channel.history(limit=amount):
+       messages.append(message)
+
+      await channel.delete_messages(messages)
+      transcript = await chat_exporter.export(ctx.channel, limit=amount, tz_info)
+       transcript_file = discord.File(io.BytesIO(transcript.encode()), filename=f"coffee-transcript-{channel}.html")
+      embed = discord.Embed(color = 0x2F3136)
+      embed.set_author(name = f"✅ Successfully pruned {amount} messages.")
+      embed.set_footer(text=f"Command invoked by {ctx.author}")
+      await ctx.send(embed=embed)
+
+      log_channel = self.bot.get_channel(self.logs(ctx.guild.id))
+      if log_channel:
+       embed = discord.Embed(
+         title="Unban 📝",
+         description=f"**Messages deleted:** `{amount}`\n**Moderator:** {ctx.author}\n**Channel Transcript:**`",
+         color=0x2F3136)
+       await log_channel.send(embed=embed)
+       await asyncio.sleep(2)
+       await log_channel.send(file=transcript_file)
+
+
     
 
 
